@@ -19,7 +19,8 @@ public class MainWindow extends JFrame {
         c.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                c.setBounds(r.nextInt((int)frame.getSize().getWidth()-100), r.nextInt((int)frame.getHeight()-40), 90, 30);
+                c.setBounds(r.nextInt((int)frame.getSize().getWidth()-100),
+                            r.nextInt(frame.getHeight()-40), 90, 30);
             }
         });
 
@@ -29,8 +30,8 @@ public class MainWindow extends JFrame {
         c.setBounds(70,70,90,30);
         content.add(c);
         frame.add(content);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
         frame.setVisible(true);
     }
 }
-
-
