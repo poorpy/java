@@ -30,6 +30,7 @@ public class MainWindow extends JFrame {
         c.setBounds(70,70,90,30);
         content.add(c);
         frame.add(content);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
         frame.setVisible(true);
