@@ -19,7 +19,7 @@ public class MainWindow extends JFrame {
         c.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                c.setBounds(r.nextInt((int)frame.getSize().getWidth()-100),
+                c.setBounds(r.nextInt(frame.getWidth()-100),
                             r.nextInt(frame.getHeight()-40), 90, 30);
             }
         });
