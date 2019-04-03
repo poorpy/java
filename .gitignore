@@ -1,3 +1,7 @@
 *
 !*.java
 !.gitignore
+!*src*
+!lab*
+!com
+!company

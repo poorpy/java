@@ -19,7 +19,7 @@ public class Main {
             public void actionPerformed(ActionEvent arg0){
                 frame.setDestX(random.nextInt(frame.getWidth() - 100));
                 frame.setDestY(random.nextInt(frame.getHeight() - 40));
-                timer.schedule(frame.task, 30, 30);
+                timer.schedule(frame.task, 10, 10);
             }
         });
 
