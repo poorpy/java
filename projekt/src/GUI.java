@@ -64,9 +64,10 @@ public class GUI {
         addCityMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String result = JOptionPane.showInputDialog(null, addCityMenu);
+                String result = JOptionPane.showInputDialog(null, "Wpisz miasto");
                 cities.add(result);
                 cb = createCityList(cities);
+                f.revalidate();
             }
         });
 //        addCityMenu.addActionListener(actionEvent -> {
