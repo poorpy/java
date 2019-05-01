@@ -1,4 +1,6 @@
 import com.toedter.calendar.JCalendar;
+
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -18,30 +20,66 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class GUI {
     static JButton b, b1, b2;
     static JLabel l;
     Date selectedDate;
     String selectedCity;
-    String cities[] = {"Wroclaw", "Warsaw", "London","Mexico"};
+    String array[] = {"Wroclaw", "Warsaw", "London","Mexico"};
+    Vector<String> cities = new Vector<>(Arrays.asList(array));
+    JComboBox cb;
 
 
     public GUI() {
+        JFrame f = new JFrame();
         JLabel city = new JLabel("Wybrane miasto: " + selectedCity, SwingConstants.CENTER);
 
-        JFrame f = new JFrame();
-        l = new JLabel("Wybierz miasto:");
-
-
+        JMenuBar mb = new JMenuBar();
+        JMenu fileMenu = new JMenu("Plik");
+        JMenuItem addCityMenu = new JMenuItem("Dodaj miasto");
+        JMenu aboutMenu = new JMenu("O programie");
+        JMenuItem aboutMenuItem = new JMenuItem();
         JPanel p = new JPanel();
-        p.add(l);
-        JComboBox cb = createCityList(cities);
-        p.add(cb);
+//        JComboBox cb = createCityList(cities);
+        cb = createCityList(cities);
+        l = new JLabel("Wybierz miasto:");
         b = new JButton("potwierdź");
+
+        JCalendar cal = new JCalendar();
+        JLabel label = new JLabel("label", SwingConstants.CENTER);
+
+        JPanel pp = new JPanel();
+        JButton addCity = new JButton("dodaj miasto");
+
+        JPanel panel = new JPanel();
+
+        fileMenu.add(addCityMenu);
+        mb.add(fileMenu);
+        f.setJMenuBar(mb);
+
+        addCityMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                String result = JOptionPane.showInputDialog(null, addCityMenu);
+                cities.add(result);
+                cb = createCityList(cities);
+            }
+        });
+//        addCityMenu.addActionListener(actionEvent -> {
+//            String result = JOptionPane.showInputDialog(null, addCityMenu);
+//            cities.add(result);
+//            cb.setModel(new DefaultComboBoxModel(cities.toArray()));
+//            f.revalidate();
+//        });
+
+
+
+        p.add(l);
+        p.add(cb);
         p.add(b);
         b.addActionListener(new ActionListener() {
             @Override
@@ -54,8 +92,6 @@ public class GUI {
             }
         });
 
-        JCalendar cal = new JCalendar();
-        JLabel label = new JLabel("label", SwingConstants.CENTER);
         label.setText(cal.getDate().toString());
         cal.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
@@ -66,8 +102,6 @@ public class GUI {
             }
         });
 
-        JPanel pp = new JPanel();
-        JButton addCity = new JButton("dodaj miasto");
         addCity.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -77,7 +111,6 @@ public class GUI {
 
         pp.add(addCity);
 
-        JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(p);
         panel.add(cal);
@@ -95,6 +128,7 @@ public class GUI {
 
         panel.add(label);
         f.add(panel);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -106,11 +140,12 @@ public class GUI {
              }
          };
 
+
          timer.schedule(task, 36000,36000);
 
     }
 
-    private static JComboBox createCityList(String cities[]) {
+    private static JComboBox createCityList(Vector<String> cities) {
         JComboBox cb = new JComboBox(cities);
         return cb;
     }
