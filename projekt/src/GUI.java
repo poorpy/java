@@ -25,6 +25,11 @@ import java.util.Date;
 import java.util.Timer;
 
 public class GUI {
+    //JFrame frame;
+    //JMenuBar menuBar;
+
+    //JLabel city;
+
     static JButton b, b1, b2;
     static JLabel l;
     Date selectedDate;
@@ -39,13 +44,9 @@ public class GUI {
         JLabel city = new JLabel("Wybrane miasto: " + selectedCity, SwingConstants.CENTER);
 
         JMenuBar mb = new JMenuBar();
-        JMenu fileMenu = new JMenu("Plik");
-        JMenuItem addCityMenu = new JMenuItem("Dodaj miasto");
-        JMenu aboutMenu = new JMenu("O programie");
-        JMenuItem aboutMenuItem = new JMenuItem();
-        JPanel p = new JPanel();
-//        JComboBox cb = createCityList(cities);
         cb = createCityList(cities);
+        FileMenu fileMenu = new FileMenu(cities, cb);
+        JPanel p = new JPanel();
         l = new JLabel("Wybierz miasto:");
         b = new JButton("potwierdź");
 
@@ -57,25 +58,8 @@ public class GUI {
 
         JPanel panel = new JPanel();
 
-        fileMenu.add(addCityMenu);
         mb.add(fileMenu);
         f.setJMenuBar(mb);
-
-        addCityMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                String result = JOptionPane.showInputDialog(null, "Wpisz miasto");
-                cities.add(result);
-                cb = createCityList(cities);
-                f.revalidate();
-            }
-        });
-//        addCityMenu.addActionListener(actionEvent -> {
-//            String result = JOptionPane.showInputDialog(null, addCityMenu);
-//            cities.add(result);
-//            cb.setModel(new DefaultComboBoxModel(cities.toArray()));
-//            f.revalidate();
-//        });
 
 
 
@@ -103,12 +87,6 @@ public class GUI {
             }
         });
 
-        addCity.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                f.repaint();
-            }
-        });
 
         pp.add(addCity);
 
